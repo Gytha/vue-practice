@@ -1,6 +1,6 @@
 # vue-practice
 
-> vue 综合练习
+> A Vue.js project
 
 ## Build Setup
 
