@@ -1,10 +1,10 @@
 <template>
   <div class="header">
     <!-- 折叠按钮 -->
-    <div class="collapse-btn" @click="collapseChage">
+    <div class="collapse-btn">
       <i class="el-icon-menu"></i>
     </div>
-    <div class="logo">vue 综合练习</div>
+    <div class="logo">首页</div>
     <div class="header-right">
       <div class="header-user-con">
         <!-- 全屏显示 -->
@@ -12,15 +12,6 @@
           <el-tooltip effect="dark" :content="fullscreen?`取消全屏`:`全屏`" placement="bottom">
             <i class="el-icon-rank"></i>
           </el-tooltip>
-        </div>
-        <!-- 消息中心 -->
-        <div class="btn-bell">
-          <el-tooltip effect="dark" :content="message?`有${message}条未读消息`:`消息中心`" placement="bottom">
-            <router-link to="/tabs">
-              <i class="el-icon-bell"></i>
-            </router-link>
-          </el-tooltip>
-          <span class="btn-bell-badge" v-if="message"></span>
         </div>
         <!-- 用户头像 -->
         <div class="user-avator"><img src="static/img/img.jpg"></div>
@@ -40,14 +31,11 @@
   </div>
 </template>
 <script>
-import bus from '../common/bus'
 export default {
   data () {
     return {
-      collapse: false,
       fullscreen: false,
-      name: 'linxin',
-      message: 2
+      name: 'linxin'
     }
   },
   computed: {
@@ -56,9 +44,7 @@ export default {
     }
   },
   mounted () {
-    if (document.body.clientWidth < 1500) {
-      this.collapseChage()
-    }
+
   },
   methods: {
     // 用户名下拉菜单选择事件
@@ -67,11 +53,6 @@ export default {
         localStorage.removeItem('userName')
         this.$router.push('/login')
       }
-    },
-    // 侧边栏折叠
-    collapseChage () {
-      this.collapse = !this.collapse
-      bus.$emit('collapse', this.collapse)
     },
     // 全屏事件
     handleFullScreen () {
@@ -115,7 +96,6 @@ export default {
 .collapse-btn {
   float: left;
   padding: 0 21px;
-  cursor: pointer;
   line-height: 70px;
 }
 .header .logo {
@@ -136,28 +116,6 @@ export default {
   transform: rotate(45deg);
   margin-right: 5px;
   font-size: 24px;
-}
-.btn-bell,
-.btn-fullscreen {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  border-radius: 15px;
-  cursor: pointer;
-}
-.btn-bell-badge {
-  position: absolute;
-  right: 0;
-  top: -2px;
-  width: 8px;
-  height: 8px;
-  border-radius: 4px;
-  background: #f56c6c;
-  color: #fff;
-}
-.btn-bell .el-icon-bell {
-  color: #fff;
 }
 .user-name {
   margin-left: 10px;

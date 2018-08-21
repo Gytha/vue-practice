@@ -155,10 +155,11 @@ export default {
         if (valid) {
           const res = this.showCode ? true : this.verifyCode.validate(this.loginForm.code)
           if (res) {
+            localStorage.setItem('userName', this.loginForm.user)
             if (this.loginForm.user === 'youzi') {
               this.$router.push({ path: '/home' })
             } else {
-              console.log('偏展示性页面')
+              this.$router.push({path: '/front'})
             }
             // this.doLogin()
           } else {

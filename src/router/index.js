@@ -1,10 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+// var express = require('express')
+// var history = require('connect-history-api-fallback')
+
 Vue.use(Router)
 
+// var app = express()
+// app.use(history())
+
 export default new Router({
-  mode: 'history',
+  // 《JavaScript高级程序设计》第16章-16.4-历史状态管理 中有提到：
+  // 在使用HTML5的状态管理机制时，请确保使用pushState()创造的每一个“假”URL，在Web服务器上都有一个真的、实际存在的URL与之对应。否则，单击“刷新”按钮会导致404错误。
+  // mode: 'history',  // vue-router设置的路径不是真实存在的路径   install connect-history-api-fallback
   routes: [
     {
       path: '/',
@@ -27,41 +35,19 @@ export default new Router({
           component: resolve => require(['../page/back/components/test.vue'], resolve),
           meta: { title: '测试' }
         }
-        // {
-        //   path: '/reserveProjects',
-        //   component: resolve => require(['../page/Markdown.vue'], resolve),
-        //   meta: { title: '储备项目' }
-        // },
-        // {
-        //   path: '/docs',
-        //   component: resolve => require(['../page/BaseForm.vue'], resolve),
-        //   meta: { title: '资料仓库' }
-        // },
-        // {
-        //   // 经济指标
-        //   path: '/eco',
-        //   component: resolve => require(['../page/VueEditor.vue'], resolve),
-        //   meta: { title: '经济指标' }
-        // },
-        // {
-        //   // 消息列表
-        //   path: '/messages',
-        //   component: resolve => require(['../page/messages.vue'], resolve),
-        //   meta: { title: '消息列表' }
-        // },
-        // {
-        //   // 历史项目
-        //   path: '/history',
-        //   component: resolve => require(['../page/Upload.vue'], resolve),
-        //   meta: { title: '历史项目' }
-        // },
-        // {
-        //   // 项目详情
-        //   path: 'projectDetails',
-        //   component: resolve => require(['../page/projectDetails.vue'], resolve),
-        //   meta: { title: '项目详情' }
-        // }
       ]
+    },
+    {
+      path: '/front',
+      component: resolve => require(['../page/front/common/Home.vue'], resolve),
+      meta: {title: '首页'}
+      // children: [
+      //   {
+      //     path: '/index',
+      //     component: resolve => require(['../page/back/home.vue'], resolve),
+      //     meta: { title: '首页' }
+      //   }
+      // ]
     },
     {
       path: '/login',
